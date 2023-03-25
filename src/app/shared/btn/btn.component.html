@@ -1,0 +1,13 @@
+<button
+  class="text-white w-full font-medium rounded text-sm bg-success-700 px-5 py-2"
+  [type]="typeBtn"
+  [ngClass]="getColors()"
+>
+  <!-- 
+        ng-content se reemplaza por el contenido del componente 
+            <app-btn>
+                {{ "log in" | titlecase }}
+            </app-btn>
+     -->
+  <ng-content></ng-content>
+</button>
