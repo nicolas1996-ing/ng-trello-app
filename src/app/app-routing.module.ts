@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './pages/board/board.component';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -13,9 +14,13 @@ const routes: Routes = [
     component: BoardsComponent,
   },
   {
-    path: "**",
-    redirectTo: "login"
-  }
+    path: 'board',
+    component: BoardComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 ];
 
 @NgModule({

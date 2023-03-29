@@ -1,0 +1,116 @@
+<div class="flex flex-col h-screen">
+  <app-navbar></app-navbar>
+  <!-- grow: factor de crecimiento, ocupar todo el alto del espacio disponible, despues de restar el espacio que ocupa el navbar -->
+  <div class="w-full grow bg-sky-600 px-4 pb-4">
+    <div class="flex flex-col h-full">
+      <div>
+        <h2 class="text-xl font-bold text-white my-4">Demo Board</h2>
+      </div>
+      <!-- ELEMENTO PADRE DRAG AND DROP ... -->
+      <div
+        class="flex grow items-start w-full h-full overflow-x-scroll"
+        cdkDropListGroup
+      >
+        <!-- crea cada columna de forma iterativa -->
+        <!-- scroll horizontal: shrink-0, overflow-x-scroll -->
+        <div
+          class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0"
+          *ngFor="let col of columns"
+        >
+          <div class="flex justify-between py-1">
+            <h3 class="text-sm font-bold ml-2">
+              {{ col.title }}
+            </h3>
+          </div>
+
+          <!-- drag and drop -->
+          <div
+            class="text-sm mt-2 min-h-[2.5rem]"
+            cdkDropList
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="col.todos"
+          >
+            <div
+              cdkDrag
+              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+              *ngFor="let task of col.todos"
+            >
+              {{ task.title }}
+            </div>
+          </div>
+        </div>
+        <!-- shrink-0: el elemento no pierde su tamano original -->
+        <button type="button shrink-0" (click)="addColum()">add column</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+
+        ...drag 1...
+        <div class="rounded bg-gray-200 w-72 p-2 mr-3">
+          <div class="flex justify-between py-1">
+            <h3 class="text-sm font-bold ml-2">To Do</h3>
+          </div>
+
+        <div
+          class="text-sm mt-2 min-h-[2.5rem]"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="taskListToDo"
+        >
+          <div
+            cdkDrag
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            *ngFor="let task of taskListToDo"
+          >
+            {{ task.title }}
+          </div>
+        </div>
+      </div>
+
+      ....drag 2....
+      <div class="rounded bg-gray-200 w-72 p-2 mr-3">
+        <div class="flex justify-between py-1">
+          <h3 class="text-sm font-bold ml-2">Doing</h3>
+        </div>
+
+        <div
+          class="text-sm mt-2 min-h-[2.5rem]"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="taskListDoing"
+        >
+          <div
+            cdkDrag
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            *ngFor="let task of taskListDoing"
+          >
+            {{ task.title }}
+          </div>
+        </div>
+      </div>
+
+      ...drag 3...
+      <div class="rounded bg-gray-200 w-72 p-2 mr-3">
+        <div class="flex justify-between py-1">
+          <h3 class="text-sm font-bold ml-2">Done</h3>
+        </div>
+
+        <div
+          class="text-sm mt-2 min-h-[2.5rem]"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="taskListDone"
+        >
+          <div
+            cdkDrag
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            *ngFor="let task of taskListDone"
+          >
+            {{ task.title }}
+          </div>
+        </div>
+      </div>
+ -->
