@@ -34,6 +34,7 @@
           <fa-icon [icon]="faInfoCircle"></fa-icon>
         </button>
 
+        <!-- control overlay 1 -->
         <button
           type="button"
           class="flex rounded-full"
@@ -59,7 +60,11 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="menuOverlay"
   [cdkConnectedOverlayOpen]="isOverlayOpen"
+  (overlayOutsideClick)="(isOverlayOpen = !isOverlayOpen)"
 >
+  <!-- cerrar el overlay al hacer click sobre cualquier area de la pantall o si se abre otro overlay-->
+  <!-- (overlayOutsideClick)="(true)" -->
+
   <div
     class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
   >
@@ -128,5 +133,3 @@
     </ul>
   </div>
 </ng-template>
-
-<!-- overlay 2. -->

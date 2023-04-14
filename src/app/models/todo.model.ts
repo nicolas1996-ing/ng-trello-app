@@ -1,9 +1,10 @@
-export interface ToDo {
-  id: string;
+export interface Task {
+  id: number;
   title: string;
 }
 
 export interface Column {
   title: string;
-  todos: ToDo[];
+  isOpenCard: boolean, 
+  todos: Task[];
 }

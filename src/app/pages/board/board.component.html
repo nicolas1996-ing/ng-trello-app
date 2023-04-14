@@ -17,10 +17,15 @@
           class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0"
           *ngFor="let col of columns"
         >
+          <!-- titulo drag and drop -->
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-bold ml-2">
               {{ col.title }}
             </h3>
+
+            <button type="button" class="mr-2">
+              <fa-icon [icon]="faEllipsis" class="pl-3"></fa-icon>
+            </button>
           </div>
 
           <!-- drag and drop -->
@@ -34,13 +39,83 @@
               cdkDrag
               class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
               *ngFor="let task of col.todos"
+              (click)="openDialog(task)"
             >
               {{ task.title }}
             </div>
           </div>
+
+          <ng-container *ngIf="!col.isOpenCard">
+            <div
+              class="flex justify-between items-center text-sm mt-2 min-h-[2.5rem]"
+            >
+              <button
+                type="button"
+                class="text-gray-500"
+                (click)="openAddCard(col)"
+              >
+                <fa-icon [icon]="faPlus" class="pl-3"></fa-icon>
+                Add a card
+              </button>
+
+              <span>
+                <fa-icon [icon]="faBook" class="pl-3 text-gray-500"></fa-icon>
+              </span>
+            </div>
+          </ng-container>
+
+          <!-- form -->
+          <ng-container *ngIf="col.isOpenCard">
+            <div class="text-sm mt-2 min-h-[2.5rem]">
+              <!-- inicio form -->
+              <form [formGroup]="addCardForm">
+                <textarea
+                  name="note"
+                  id="note-01"
+                  cols="30"
+                  rows="10"
+                  class="w-full h-16 text-sm rounded border-2 border-gray-300"
+                  placeholder="Enter a title for this card"
+                  formControlName="title"
+                ></textarea>
+                <div
+                  class="text-sm min-h-[2.5rem] flex justify-between items-center"
+                >
+                  <div class="text-sm flex items-center">
+                    <app-btn
+                      [typeBtn]="'submit'"
+                      [bgColor]="'primary'"
+                      (click)="onSubmit(col)"
+                    >
+                      {{ "add card" | titlecase }}
+                    </app-btn>
+                    <button type="button" (click)="openAddCard(col)">
+                      <fa-icon [icon]="faX" class="pl-3"></fa-icon>
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="mr-2"
+                    (click)="activeTextField()"
+                  >
+                    <fa-icon [icon]="faEllipsis" class="pl-3"></fa-icon>
+                  </button>
+                </div>
+              </form>
+              <!-- fin form. -->
+            </div>
+          </ng-container>
         </div>
+
         <!-- shrink-0: el elemento no pierde su tamano original -->
-        <button type="button shrink-0" (click)="addColum()">add column</button>
+        <button
+          type="button"
+          class="shrink-0 text-gray-900 bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
+          (click)="addColum()"
+        >
+          Add colum
+        </button>
       </div>
     </div>
   </div>

@@ -1,0 +1,110 @@
+<div class="flex flex-col h-screen">
+  <app-navbar></app-navbar>
+  <div class="w-full grow bg-white-600 p-6">
+    <!-- trabajar con campos de formularios reactivos ... -->
+    <!-- <input type="search" [formControl]="inputSelect" /> -->
+    <h1 class="text-xl text-gray-700 font-semibold italic">Filter table</h1>
+
+    <!-- inicio form -->
+    <form [formGroup]="searchForm" class="mb-5">
+      <div class="my-3">
+        <label
+          for="search string"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+          >select option</label
+        >
+        <select
+          formControlName="selectType"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value>Choose a colum name</option>
+          <option *ngFor="let columnName of selectValues" [ngValue]="columnName">
+            {{ columnName }}
+          </option>
+        </select>
+      </div>
+
+      <div>
+        <label
+          for="search string"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+          >type something here</label
+        >
+        <input
+          type="search"
+          formControlName="inputStr"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+      </div>
+    </form>
+    <!-- fin form. -->
+    <h1 class="text-xl text-gray-700 font-semibold italic">Table</h1>
+
+    <table
+      cdk-table
+      [dataSource]="products"
+      class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    >
+      <!-- Position Column -->
+      <ng-container *ngFor="let col of columns">
+        <!--  columnsName.includes(col.name) === true  -->
+        <ng-container [cdkColumnDef]="col.name">
+          <!-- header columna -->
+          <th cdk-header-cell *cdkHeaderCellDef class="px-6 py-3">
+            {{ col.name }}
+          </th>
+
+          <!-- content columna -->
+          <td cdk-cell *cdkCellDef="let product" class="px-6 py-3">
+            <span *ngIf="col.type == 'string'">
+              {{ product[col.name] }}
+            </span>
+            <span *ngIf="col.type == 'currency'">
+              {{ product[col.name] | currency }}
+            </span>
+            <app-btn
+              typeBtn="button"
+              bgColor="primary"
+              *ngIf="col.type == 'action'"
+              (click)="update(product)"
+            >
+              {{ col.name }}
+            </app-btn>
+            <img
+              class="rounded w-14"
+              [src]="product[col.name][0]"
+              [alt]="product[col.name][0]"
+              *ngIf="col.type == 'image'"
+            />
+          </td>
+
+          <!-- footer columna -->
+          <td cdk-footer-cell *cdkFooterCellDef class="px-6 py-3">
+            <span *ngIf="col.type == 'currency'">
+              {{ totalPriceProducts | currency }}
+            </span>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <!-- estilos aplicados a la fila del header -->
+      <tr
+        cdk-header-row
+        *cdkHeaderRowDef="columnsName"
+        class="text-xm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      ></tr>
+      <!-- estilos aplicados a las filas del body -->
+      <tr
+        cdk-row
+        *cdkRowDef="let row; columns: columnsName"
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      ></tr>
+      <!-- estilos aplicados al footer -->
+      <tr
+        cdk-footer-row
+        *cdkFooterRowDef="columnsName"
+        class="text-xm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      ></tr>
+    </table>
+  </div>
+</div>
