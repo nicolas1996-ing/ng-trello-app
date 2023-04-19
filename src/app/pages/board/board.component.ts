@@ -112,7 +112,7 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.initAddCardForm();
     this.addCardForm.valueChanges.subscribe((val) => {
-      console.log(val);
+      // console.log(val);
     });
   }
 
@@ -146,7 +146,7 @@ export class BoardComponent implements OnInit {
   }
   // drag and drop: fx maneja mov en y entre columnas
   drop($event: CdkDragDrop<Task[]>) {
-    console.log($event);
+    // console.log($event);
 
     // movimiento en la misma columna
     if ($event.previousContainer === $event.container) {
@@ -196,8 +196,8 @@ export class BoardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dataFromDialog) => {
       // la data que recibe es opcional
-      console.log('The dialog was closed');
-      console.log(dataFromDialog);
+      // console.log('The dialog was closed');
+      // console.log(dataFromDialog);
     });
   }
 }

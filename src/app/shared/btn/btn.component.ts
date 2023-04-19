@@ -40,7 +40,7 @@ export class BtnComponent implements OnInit {
   // aplicar clases de forma dinamica ngClass
   // diccionario de colores tailwind.config.js
   getColors() {
-    console.log(this.mapColors[this.bgColor])
+    // console.log(this.mapColors[this.bgColor])
     return this.mapColors[this.bgColor];
   }
 }
