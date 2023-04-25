@@ -22,7 +22,7 @@
     <div class="bg-white rounded shadow py-4 px-6">
       <div class="mb-4">
         <h1 class="text-center font-semibold pt-4 pb-8">
-          {{ "log in to trello" | titlecase }}
+          {{ "register" | titlecase }}
         </h1>
 
         <!-- init form -->
@@ -45,20 +45,17 @@
           </div>
           <div class="relative">
             <app-btn [typeBtn]="'submit'" [bgColor]="'success'">
-              {{ "log in" | titlecase }}
+              {{ "create account" | titlecase }}
             </app-btn>
           </div>
           <hr />
           <div
             class="hidden sm:flex justify-center items-center space-x-0 space-y-0 md:space-x-2"
           >
-            <a class="text-blue-300 font-light" href="#">{{
-              "can not log in ?" | titlecase
+            <a class="text-blue-300 font-light" href="/login">{{
+              "already have account ?" | titlecase
             }}</a>
-            <span class="text-gray-500 hidden md:block">•</span>
-            <a class="text-blue-300 font-light" href="/register">{{
-              "sign up for an account" | titlecase
-            }}</a>
+          
           </div>
         </form>
         <!-- finish form -->

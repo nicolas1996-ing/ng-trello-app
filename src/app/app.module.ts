@@ -24,6 +24,10 @@ import { ScrollComponent } from './pages/scroll/scroll.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkTableModule} from '@angular/cdk/table';
 import { TableComponent } from './pages/table/table.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({
@@ -37,6 +41,7 @@ import { TableComponent } from './pages/table/table.component';
     ToDoModalComponent,
     ScrollComponent,
     TableComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,8 @@ import { TableComponent } from './pages/table/table.component';
     FormsModule, // FORMS
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent],
